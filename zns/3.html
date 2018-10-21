@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+  <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+  <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+
+</head>
+<body>
+  <div id="div1"></div>
+
+  <script type="text/babel">
+    class Comp extends React.Component {
+      render(){
+        return <span title={this.props.age}>hello world {this.props.name}.</span>;
+      }
+    }
+    var oDiv = document.getElementById('div1');
+    ReactDOM.render(
+      <Comp name="sam" age="27"/>,
+      oDiv
+    );
+  </script>
+</body>
+</html>
