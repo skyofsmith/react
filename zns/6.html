@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+    <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+    <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="div1"></div>
+
+    <script type="text/babel">
+        class Clock extends React.Component {
+          constructor(...args){
+            super(...args);
+            this.state = {
+                h: 0,
+                m: 0,
+                s: 0
+            };
+            var _this = this;
+            setInterval(function(){
+                _this.tick();
+            }, 1000);
+            this.tick();
+      }
+
+      tick(){
+          var oDate = new Date();
+          this.setState({
+              h: oDate.getHours(),
+              m: oDate.getMinutes(),
+              s: oDate.getSeconds(),
+          })
+      }
+
+      render(){
+        return <div>
+            <span>{this.state.h}</span>:
+            <span>{this.state.m}</span>:
+            <span>{this.state.s}</span>
+        </div>;
+      }
+    }
+    var oDiv = document.getElementById('div1');
+    ReactDOM.render(
+      <Clock/>,
+      oDiv
+    );
+  </script>
+</body>
+
+</html>
