@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+    <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+    <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+
+    <script type="text/babel">
+        class Comp extends React.Component {
+            constructor () {
+                super();
+                console.log('初始化', 'constructor');
+                this.state = {
+                    num: 0
+                };
+                this.interval = setInterval(() => this.tick(), 1000);
+            }
+
+            tick () {
+                this.setState({
+                    num: this.state.num + 1
+                });
+            }
+
+            componentWillMount(){
+                console.log('即将创建完成', 'componentWillMount');
+            }
+
+            componentDidMount(){
+                console.log('刚刚创建完', 'componentDidMount');
+            }
+
+            componentWillUpdate(){
+                console.log('即将更新完成', 'componentWillUpdate');
+                console.log('this.state.num', this.state.num);
+            }
+
+            componentDidUpdate(){
+                console.log('刚刚更新完', 'componentDidUpdate');
+                console.log('this.state.num', this.state.num);
+            }
+
+            componentWillUnmount(){
+                console.log('即将销毁', 'componentWillUnmount');
+                clearInterval(this.interval);
+            }
+
+            render(){
+                return <div>hello world</div>;
+            }
+        }
+        var oDiv = document.getElementById('div1');
+        var isShow = 0;
+        setInterval(function(){
+            if (isShow % 2 === 0) {
+                ReactDOM.render(
+                    <Comp/>,
+                    oDiv
+                );
+            } else {
+                ReactDOM.render(
+                    <div>...</div>,
+                    oDiv
+                );
+            }
+            isShow++;
+        }, 5000);
+    </script>
+</body>
+</html>
