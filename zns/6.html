@@ -30,7 +30,10 @@
             setInterval(function(){
                 _this.tick();
             }, 1000);
-            this.tick();
+      }
+
+      componentDidMount(){
+          this.tick();
       }
 
       tick(){
