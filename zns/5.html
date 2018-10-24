@@ -28,9 +28,14 @@
         };
       }
 
+        fn () {
+            this.setState({
+                display: this.state.display == 'block' ? 'none' : 'block'
+            });
+        }
       render(){
         return <div>
-            <input type="button" value="显示隐藏"/>
+            <input type="button" value="显示隐藏" onClick={this.fn.bind(this)}/>
             <div className="box" style={{display:this.state.display}}></div>
         </div>;
       }
