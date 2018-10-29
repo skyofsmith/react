@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+    <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+    <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+
+    <script type="text/babel">
+        class Title extends React.Component {
+
+            constructor(...args){
+                super(...args);
+                this.state = {
+                    color: 'gray'
+                }
+            }
+
+            fn(){
+                this.setState({
+                    color: 'red'
+                })
+            }
+
+            render(){
+                return <div>
+                    <input type="button" value="button" onClick={this.fn.bind(this)}/>
+                    <span style={{color: this.state.color}}>qweqweqwe</span>
+                </div>;
+            }
+        }
+        $(function(){
+            ReactDOM.render(
+                <Title/>,
+                $('#div1')[0]
+            );
+        });
+
+    </script>
+</body>
+</html>
