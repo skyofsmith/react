@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+    <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+    <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #ccc;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <blue-view></blue-view>
+
+    <script type="text/babel">
+        class Drag extends React.Component {
+            constructor(...args){
+                super(...args);
+                this.state = {
+                    x: 0,
+                    y: 0
+                };
+            }
+
+            fn(ev){
+                console.log(ev);
+                var disX = ev.pageX - this.state.x;
+                var disY = ev.pageY - this.state.y;
+                var _this = this;
+                document.onmousemove = function(ev){
+                    _this.setState({
+                        x: ev.pageX - disX,
+                        y: ev.pageY - disY,
+                    });
+                }
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+                /*$(document).mousemove(function (ev) {
+                    _this.setState({
+                        x: ev.pageX - disX;
+                        y: ev.pageY - disY;
+                    });
+                });
+                $(document).mouseup(function (ev) {
+                    this.off('mousemove');
+                    this.off('mouseup');
+                });*/
+            }
+            render(){
+                return <div style={{
+                    left: this.state.x + 'px',
+                    top: this.state.y + 'px'
+                }} className="box" onMouseDown={this.fn.bind(this)}>
+                    asd
+                </div>;
+            }
+        }
+        $(function(){
+            ReactDOM.render(
+                <Drag/>,
+                $('blue-view')[0]
+            );
+        });
+
+    </script>
+</body>
+</html>
