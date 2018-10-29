@@ -11,6 +11,8 @@
     <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
     <style>
         .box {
+            top: 0;
+            left 0;
             width: 200px;
             height: 200px;
             background-color: #ccc;
@@ -25,43 +27,28 @@
         class Drag extends React.Component {
             constructor(...args){
                 super(...args);
-                this.state = {
-                    x: 0,
-                    y: 0
-                };
+
             }
 
-            fn(ev){
-                console.debug(ev);
-                var disX = ev.pageX - this.state.x;
-                var disY = ev.pageY - this.state.y;
+            componentDidMount(){
+                var oDiv = this.refs['div1'];
                 var _this = this;
-                document.onmousemove = function(ev){
-                    _this.setState({
-                        x: ev.pageX - disX,
-                        y: ev.pageY - disY,
-                    });
+                oDiv.onmousedown =  function(ev){
+                    var disX = ev.pageX - parseInt(oDiv.style.left || 0);
+                    var disY = ev.pageY - parseInt(oDiv.style.top || 0);
+                    document.onmousemove = function(ev){
+                        _this.refs['div1'].style.left = (ev.pageX - disX) + 'px';
+                        _this.refs['div1'].style.top = (ev.pageY - disY) + 'px';
+                    }
+                    document.onmouseup = function(){
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                    };
                 }
-                document.onmouseup = function(){
-                    document.onmousemove = null;
-                    document.onmouseup = null;
-                };
-                /*$(document).mousemove(function (ev) {
-                    _this.setState({
-                        x: ev.pageX - disX;
-                        y: ev.pageY - disY;
-                    });
-                });
-                $(document).mouseup(function (ev) {
-                    this.off('mousemove');
-                    this.off('mouseup');
-                });*/
             }
+
             render(){
-                return <div style={{
-                    left: this.state.x + 'px',
-                    top: this.state.y + 'px'
-                }} className="box" onMouseDown={this.fn.bind(this)}>
+                return <div ref="div1" className="box">
                     asd
                 </div>;
             }
