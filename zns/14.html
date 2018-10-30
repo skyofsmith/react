@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+    <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+    <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+    <style>
+        img {
+            display: block;
+            margin-top: 500px;
+            width: 110px;
+            height: 110px;
+        }
+    </style>
+</head>
+<body>
+    <blue-view></blue-view>
+
+    <script type="text/babel">
+        class LazyLoad extends React.Component {
+            constructor(...args){
+                super(...args);
+                console.log(this.props.imgs);
+                this.aImgPath = this.props.imgs.split(',');
+
+                var _this = this;
+                window.onscroll = function () {
+                    var scrollTop = document.documentElement.scrollTop ||
+                        document.body.scrollTop;
+                    console.log(scrollTop);
+                    var childrens = _this.refs['div1'].children;
+                    for (var i = 0; i < childrens.length; i++) {
+                        if (!childrens[i].src && childrens[i].y < scrollTop + 1000) {
+                            console.log(childrens[i].getAttribute('data-src'));
+                            childrens[i].src = childrens[i].getAttribute('data-src');
+                        }
+                    }
+                };
+            }
+
+            render(){
+                console.log(this.aImgPath);
+                var res = [];
+                for (var i = 0; i < this.aImgPath.length; i++) {
+                    res.push(<img key={i} data-src={this.aImgPath[i]} alt="logo"/>);
+                }
+                return <div ref="div1">
+                    {res}
+                </div>;
+            }
+        }
+        $(function(){
+            ReactDOM.render(
+                <LazyLoad imgs="./pic/pic.jpg,./pic/pic1.jpg,./pic/pic2.jpg,./pic/pic3.jpg,./pic/pic4.jpg,./pic/pic5.jpg"/>,
+                $('blue-view')[0]
+            );
+
+        });
+
+    </script>
+</body>
+</html>
