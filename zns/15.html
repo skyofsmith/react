@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="bower_components/babel/browser.js" charset="utf-8"></script>
+    <script src="bower_components/react/react.development.js" charset="utf-8"></script>
+    <script src="bower_components/react/react-dom.development.js" charset="utf-8"></script>
+    <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <blue-view></blue-view>
+
+    <script type="text/babel">
+        class UserLoginForm extends React.Component {
+            constructor(...args){
+                super(...args);
+
+            }
+
+            render(){
+                return <form ref="div1" action="./a" method="post">
+                    <label>
+                        <span>username:</span>
+                        <input type="text" name="username" defaultValue={this.props.defaultUserName}/>
+                    </label>
+                    <br/>
+                    <label>
+                        <span>receive email ?</span>
+                        <input type="checkbox" name="email" defaultChecked={true}/>
+                    </label>
+                    <br/>
+                    <input type="button" value="submit"/>
+                </form>;
+            }
+        }
+        $(function(){
+            ReactDOM.render(
+                <UserLoginForm defaultUserName="asd"/>,
+                $('blue-view')[0]
+            );
+
+        });
+
+    </script>
+</body>
+</html>
