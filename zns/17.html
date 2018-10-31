@@ -16,34 +16,43 @@
     <blue-view></blue-view>
 
     <script type="text/babel">
-        class Tmp extends React.Component {
+        class Child extends React.Component {
             constructor(...args){
                 super(...args);
-            }
-
-            fn1(){
-                console.log('father');
-            }
-
-            fn2(ev){
-                console.log('child');
-                // ev.nativeEvent.stopImmediatePropagation();
-                // ev.nativeEvent.stopPropergation();    //cannot too
-                // ev.nativeEvent.cancelBubble = true;    //cannot too
-                // ev.cancelBubble = true;    //useless
-                // return false;    //useless
-                ev.stopPropagation();    //yes
+                this.cV = 456;
             }
 
             render(){
-                return <div onClick={this.fn1.bind(this)}>
-                    <div onClick={this.fn2.bind(this)}>123</div>
+                console.log(this.props.c);
+                this.props.c(this.cV);
+                return <div>
+                    {this.props.a}
                 </div>;
             }
         }
+
+        class Parent extends React.Component {
+            constructor(...args){
+                super(...args);
+                this.a = 123;
+            }
+
+            fn(val){
+                console.log('fn', val);
+            }
+
+            render(){
+                return <div>
+                    <hr/>
+                    <Child a={this.a} c={this.fn.bind(this)}/>
+                    <hr/>
+                </div>;
+            }
+        }
+
         $(function(){
             ReactDOM.render(
-                <Tmp/>,
+                <Parent/>,
                 $('blue-view')[0]
             );
 
