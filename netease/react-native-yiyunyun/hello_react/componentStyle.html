@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="./build/babel.min.js" charset="utf-8"></script>
+    <script src="./build/react.development.js" charset="utf-8"></script>
+    <script src="./build/react-dom.development.js" charset="utf-8"></script>
+    <style>
+        .pStyle {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+<script type="text/babel">
+    var hStyle = {
+        color: 'red'
+    };
+    ReactDOM.render(
+        <div style={ {backgroundColor: 'gray', border: 'solid 1px maroon'} }>
+            <h1 style={hStyle}>Hello React</h1>
+            <p className="pStyle">sam</p>
+        </div>,
+        document.getElementById('container')
+    );
+</script>
+</html>
