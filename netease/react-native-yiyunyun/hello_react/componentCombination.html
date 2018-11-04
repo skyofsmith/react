@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="./build/babel.min.js" charset="utf-8"></script>
+    <script src="./build/react.development.js" charset="utf-8"></script>
+    <script src="./build/react-dom.development.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="container"></div>
+
+</body>
+<script type="text/babel">
+
+    var WebName = React.createClass({
+        render: function() {
+            return <h1>sam</h1>;
+        }
+    });
+    var WebLink = React.createClass({
+        render: function() {
+            return <a href="https://github.com/skyofsmith">skyofsmith</a>;
+        }
+    });
+    var WebShow = React.createClass({
+        render: function() {
+            return (
+                <div>
+                    <WebName />
+                    <WebLink />
+                </div>
+            );
+        }
+    });
+    ReactDOM.render(
+        <WebShow />,
+        document.getElementById('container')
+    );
+</script>
+</html>
