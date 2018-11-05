@@ -5,18 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    <script src="./build/babel.min.js" charset="utf-8"></script>
-    <script src="./build/react.development.js" charset="utf-8"></script>
-    <script src="./build/react-dom.development.js" charset="utf-8"></script>
+    <script src="../lib/15/browser.js" charset="utf-8"></script>
+    <script src="../lib/15/react.js" charset="utf-8"></script>
+    <script src="../lib/15/react-dom.js" charset="utf-8"></script>
 </head>
 <body>
     <div id="container"></div>
+    <hr>
+    <div id="container2"></div>
 </body>
 <script type="text/babel">
-
+    var WebName = React.createClass({
+        render: function() {
+            return <h1>{this.props.webname}</h1>;
+        }
+    });
+    var WebLink = React.createClass({
+        render: function() {
+            return <a href={this.props.weblink}>{this.props.weblink}</a>;
+        }
+    });
+    var WebShow = React.createClass({
+        render: function() {
+            return (
+                <div>
+                    <WebName webname={this.props.wname} />
+                    <WebLink weblink={this.props.wlink}/>
+                </div>
+            );
+        }
+    });
     ReactDOM.render(
-        <h1>Hello React</h1>,
+        <WebShow wname="sam" wlink="http://github.com/skyofsmith" />,
         document.getElementById('container')
     );
+    var Link = React.createClass({
+        render: function () {
+            return <a {...this.props}>{this.props.name}</a>;
+        }
+    });
+    ReactDOM.render(
+        <Link name="sam" href="http://github.com/skyofsmith" />,
+        document.getElementById('container2')
+    );
+
 </script>
 </html>
