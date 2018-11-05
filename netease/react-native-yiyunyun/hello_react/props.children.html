@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../lib/15/browser.js" charset="utf-8"></script>
+    <script src="../lib/15/react.js" charset="utf-8"></script>
+    <script src="../lib/15/react-dom.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <hr>
+</body>
+<script type="text/babel">
+    var ListComponent = React.createClass({
+        render: function() {
+            return (
+                <ul>
+                    {
+                        this.props.children
+                    }
+                    {
+                        React.Children.map(this.props.children, function(child) {
+                            return <li>{child}</li>;
+                        });
+                    }
+                </ul>
+            );
+        }
+    });
+
+    ReactDOM.render(
+        (
+            <ListComponent>
+                <h1>sam</h1>
+                <a href="http://github.com/skyofsmith">http://github.com/skyofsmith</a>
+            </ListComponent>
+        ),
+        document.getElementById('container')
+    );
+</script>
+</html>
