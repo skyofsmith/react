@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <script src="../lib/15/browser.js" charset="utf-8"></script>
+    <script src="../lib/15/react.js" charset="utf-8"></script>
+    <script src="../lib/15/react-dom.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <hr>
+    <div id="container2"></div>
+</body>
+<script type="text/babel">
+    var MyButton = React.createClass({
+        handleClick: function() {
+            alert('clicked');
+        },
+        render: function() {
+            return (
+                <button onClick={this.handleClick}>{this.props.buttonTitle}</button>
+            );
+        }
+    });
+    ReactDOM.render(
+        <MyButton buttonTitle="btn" />,
+        document.getElementById('container')
+    );
+    //
+    var CheckButton = React.createClass({
+        getInitialState: function() {
+            return {
+                //
+                isCheck: false
+            };
+        },
+        handleChange: function() {
+            this.setState({
+                isCheck: !this.state.isCheck
+            });
+        },
+        render: function() {
+            var text = this.state.isCheck ? 'checked' : 'unchecked';
+            return (
+                <div>
+                    <input type="checkbox" onChange={this.handleChange}/>
+                    {text}
+                </div>
+            );
+        }
+    });
+    ReactDOM.render(
+        <CheckButton />,
+        document.getElementById('container2')
+    );
+</script>
+</html>
