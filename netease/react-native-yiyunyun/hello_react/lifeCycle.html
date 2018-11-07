@@ -15,20 +15,57 @@
     <div id="container2"></div>
 </body>
 <script type="text/babel">
-    var MyButton = React.createClass({
-        handleClick: function() {
-            alert('clicked');
+    var Demo = React.createClass({
+        //make instance
+        getDefaultProps: function() {
+            console.log('getDefaultProps');
+            return {};
+        },
+        //mount
+        getInitialState: function() {
+            console.log('getInitialState');
+            return null;
+        },
+        componentWillMount: function() {
+            console.log('componentWillMount');
         },
         render: function() {
+            console.log('render');
             return (
-                <button onClick={this.handleClick}>{this.props.buttonTitle}</button>
+                <div>aaaa</div>
             );
+        },
+        componentDidMount: function() {
+            console.log('componentDidMount');
+        },
+        //update
+        componentWillReceiveProps: function() {
+            console.log('componentWillReceiveProps');
+        },
+        shouldComponentUpdate: function() {
+            console.log('shouldComponentUpdate');
+            return true;
+        },
+        componentWillUpdate: function() {
+            console.log('componentWillUpdate');
+        },
+        componentDidUpdate: function() {
+            console.log('componentDidUpdate');
+        },
+        //destroy
+        componentWillUnmount: function() {
+            console.log('componentWillUnmount');
         }
     });
 
     ReactDOM.render(
-        <CheckButton />,
+        <Demo />,
         document.getElementById('container')
     );
+    ReactDOM.render(
+        <Demo />,
+        document.getElementById('container')
+    );
+    ReactDOM.unmountComponentAtNode(document.getElementById('container'));
 </script>
 </html>
