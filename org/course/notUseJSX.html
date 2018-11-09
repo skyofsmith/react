@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>not use jsx</title>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+<script src="../lib/babel.min.js" charset="utf-8"></script>
+<script src="../lib/react.development.js" charset="utf-8"></script>
+<script src="../lib/react-dom.development.js" charset="utf-8"></script>
+<script type="text/javascript">
+    class Hello extends React.Component {
+        render() {
+            return React.createElement('div', {className: 'shopping-list'},
+                React.createElement('h1', null, 'a1'),
+                React.createElement('ul', null, 'a2')
+            );
+        }
+    }
+    ReactDOM.render(
+        <Hello />,
+        document.getElementById('content')
+    );
+</script>
+</html>
