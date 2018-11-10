@@ -22,7 +22,8 @@ class CommentBox extends React.Component {
             <div className="content-box">
                 Conment Box!
                 <h1>Comments</h1>
-
+                <CommentList />
+                <CommentForm />
             </div>
         );
     }
