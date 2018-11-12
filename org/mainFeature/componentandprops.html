@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>helloworld</title>
+</head>
+<body>
+    <div id="root"></div>
+    <hr>
+    <div id="root2"></div>
+</body>
+<script src="../lib/react.development.js" charset="utf-8"></script>
+<script src="../lib/react-dom.development.js" charset="utf-8"></script>
+<script src="../lib/babel.min.js" charset="utf-8"></script>
+<script type="text/babel">
+    function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+    }
+    ReactDOM.render(
+        <Welcome />,
+        document.getElementById('root')
+    );
+    //
+    class Hello extends React.Component {
+        render() {
+            return <h1>Hello, {this.props.name}</h1>;
+        }
+    }
+    ReactDOM.render(
+        <Hello />,
+        document.getElementById('root2')
+    );
+</script>
+</html>
