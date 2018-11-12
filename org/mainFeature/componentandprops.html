@@ -18,8 +18,9 @@
     function Welcome(props) {
         return <h1>Hello, {props.name}</h1>;
     }
+    const element = <Welcome name="Sara" />;
     ReactDOM.render(
-        <Welcome />,
+        element,
         document.getElementById('root')
     );
     //
@@ -28,8 +29,9 @@
             return <h1>Hello, {this.props.name}</h1>;
         }
     }
+    const element2 = <Hello name="Sara" />;
     ReactDOM.render(
-        <Hello />,
+        element2,
         document.getElementById('root2')
     );
 </script>
