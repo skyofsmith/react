@@ -10,6 +10,10 @@
     <div id="root"></div>
     <hr>
     <div id="root2"></div>
+    <hr>
+    <div id="root3"></div>
+    <hr>
+    <div id="root4"></div>
 </body>
 <script src="../lib/react.development.js" charset="utf-8"></script>
 <script src="../lib/react-dom.development.js" charset="utf-8"></script>
@@ -33,6 +37,56 @@
     ReactDOM.render(
         element2,
         document.getElementById('root2')
+    );
+    //
+    function App() {
+        return (
+            <div>
+                <Welcome name="Sara" />
+                <Welcome name="Cahal" />
+                <Welcome name="Edite" />
+            </div>
+        );
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root3')
+    );
+    //
+    function Avatar(props) {
+        return (
+            <img className="Avatar"
+                src={props.user.avatarUrl}
+                alt={props.user.name}
+            />
+        );
+    }
+    function UserInfo(props) {
+        return (
+            <div className="UserInfo">
+                <Avatar user={props.user} />
+                <div className="UserInfo-name">
+                    {props.user.name}
+                </div>
+            </div>
+        );
+    }
+    function Comment(props) {
+        return (
+            <div className="Comment">
+                <UserInfo user={props.author} />
+                <div className="Comment-text">
+                    {props.text}
+                </div>
+                <div className="Comment-date">
+                    {formatDate(props.date)}
+                </div>
+            </div>
+        );
+    }
+    ReactDOM.render(
+        <Comment author="sam zz" text="a" date="2018-11-13"/>,
+        document.getElementById('root4')
     );
 </script>
 </html>
