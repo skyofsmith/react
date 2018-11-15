@@ -8,14 +8,102 @@
 </head>
 <body>
     <div id="root"></div>
+    <hr>
+    <div id="root2"></div>
+    <hr>
+    <div id="root3"></div>
+    <hr>
+    <div id="root4"></div>
 </body>
 <script src="../lib/react.development.js" charset="utf-8"></script>
 <script src="../lib/react-dom.development.js" charset="utf-8"></script>
 <script src="../lib/babel.min.js" charset="utf-8"></script>
 <script type="text/babel">
+    const numbers = [1, 2, 3, 4, 5];
+    const listItems = numbers.map((number) =>
+        <li>{number}</li>
+    );
     ReactDOM.render(
-        <h1>Hello, world!</h1>,
+        <ul>{listItems}</ul>,
         document.getElementById('root')
     );
+    //
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) =>
+            <li key={number.toString()}>
+                {number}
+            </li>
+        );
+        return (
+            <ul>{listItems}</ul>
+        );
+    }
+
+    const numbers2 = [1, 2, 3, 4, 5];
+    ReactDOM.render(
+        <NumberList numbers={numbers2} />,
+        document.getElementById('root2')
+    );
+    //
+    function ListItem(props) {
+        // 正确！这里不需要指定 key ：
+        return <li>{props.value}</li>;
+    }
+
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) =>
+            // 正确！key 应该在这里被指定
+            <ListItem key={number.toString()}
+                  value={number} />
+        );
+        return (
+            <ul>
+            {listItems}
+            </ul>
+        );
+    }
+
+    const numbers3 = [1, 2, 3, 4, 5];
+    ReactDOM.render(
+        <NumberList numbers={numbers3} />,
+        document.getElementById('root3')
+    );
+    //
+    function Blog(props) {
+        const sidebar = (
+            <ul>
+                {props.posts.map((post) =>
+                    <li key={post.id}>
+                        {post.title}
+                    </li>
+                )}
+            </ul>
+        );
+        const content = props.posts.map((post) =>
+            <div key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+            </div>
+        );
+        return (
+            <div>
+                {sidebar}
+                <hr />
+                {content}
+            </div>
+        );
+    }
+
+    const posts = [
+        {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+        {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+    ];
+    ReactDOM.render(
+        <Blog posts={posts} />,
+        document.getElementById('root4')
+    );
+    //
 </script>
 </html>
