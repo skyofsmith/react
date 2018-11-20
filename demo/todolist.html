@@ -10,12 +10,79 @@
 
 <body>
     <div id="example"></div>
-    <script src="../lib/react/react.development.js"></script>
-    <script src="../lib/react/react-dom.development.js"></script>
-    <script src="../lib/babel/browser.js"></script>
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
     <script type="text/babel">
+        class AddItem extends React.Component {
+            constructor(){
+                super();
+                this.state = {
+                    text: ''
+                };
+            }
+            changeText(e) {
+                this.setState({
+                    text: e.target.value
+                });
+            }
+            addItem() {
+                var text = this.state.text;
+                this.props.addfun(text);
+                this.setState({
+                    text: ''
+                });
+            }
+            render(){
+                return (
+                    <div>
+                        <input type="text" value={this.state.text} onChange={this.changeText.bind(this)}/>
+                        <button onClick={this.addItem.bind(this)}>Add</button>
+                    </div>
+                );
+            }
+        }
+        class List extends React.Component {
+            constructor(){
+                super();
+            }
+            render(){
+                var list = this.props.list.map((item, index) => {
+                    return (
+                        <li><span>{item}</span><button onClick={this.removeItem.bind(this)}>&times;</button></li>
+                    );
+                });
+                return (
+                    <div>
+                        <ul>
+                            {list}
+                        </ul>
+                        <hr/>
+                    </div>
+                );
+            }
+        }
+        class TodoList extends React.Component {
+            constructor(){
+                super();
+                this.list = [];
+            }
+            addItem(text) {
+                this.list.push(text);
+            }
+            render(){
+                return (
+                    <div>
+                        <List list={this.list}/>
+                        <AddItem addfun={this.addItem.bind(this)}/>
+                    </div>
+                );
+            }
+        }
         ReactDOM.render(
-        <h1>Hello, world!</h1>, document.getElementById('example') );
+            <TodoList />,
+            document.getElementById('example')
+        );
     </script>
 </body>
 
