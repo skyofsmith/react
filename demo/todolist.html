@@ -46,10 +46,11 @@
             constructor(){
                 super();
             }
+            removeItem() {}
             render(){
                 var list = this.props.list.map((item, index) => {
                     return (
-                        <li><span>{item}</span><button onClick={this.removeItem.bind(this)}>&times;</button></li>
+                        <li key={index}><span>{item}</span><button onClick={this.removeItem.bind(this)}>&times;</button></li>
                     );
                 });
                 return (
@@ -65,7 +66,7 @@
         class TodoList extends React.Component {
             constructor(){
                 super();
-                this.list = [];
+                this.list = ['hello', 'good', 'night'];
             }
             addItem(text) {
                 this.list.push(text);
@@ -79,7 +80,7 @@
                 );
             }
         }
-        ReactDOM.render(
+        var app = ReactDOM.render(
             <TodoList />,
             document.getElementById('example')
         );
