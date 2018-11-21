@@ -46,11 +46,17 @@
             constructor(){
                 super();
             }
-            removeItem() {}
+            removeItem(e) {
+                var index = e.target.getAttribute('index');
+                this.props.removeItem(Number(index));
+            }
             render(){
                 var list = this.props.list.map((item, index) => {
                     return (
-                        <li key={index}><span>{item}</span><button onClick={this.removeItem.bind(this)}>&times;</button></li>
+                        <li key={index}>
+                            <span>{item}</span>
+                            <button onClick={this.removeItem.bind(this)} index={index}>&times;</button>
+                        </li>
                     );
                 });
                 return (
@@ -66,15 +72,32 @@
         class TodoList extends React.Component {
             constructor(){
                 super();
-                this.list = ['hello', 'good', 'night'];
+                this.state = {
+                    list : ['hello', 'good', 'night']
+                };
             }
             addItem(text) {
-                this.list.push(text);
+                this.setState({
+                    list: this.state.list.concat(text)
+                });
+            }
+            removeItem(index){
+                var resList = this.state.list.slice();
+                resList.splice(index, 1);
+                this.setState({
+                    list: resList
+                });
+            }
+            clear(){
+                this.setState({
+                    list: []
+                });
             }
             render(){
                 return (
                     <div>
-                        <List list={this.list}/>
+                        <button onClick={this.clear.bind(this)}>clear</button>
+                        <List list={this.state.list} removeItem={this.removeItem.bind(this)}/>
                         <AddItem addfun={this.addItem.bind(this)}/>
                     </div>
                 );
