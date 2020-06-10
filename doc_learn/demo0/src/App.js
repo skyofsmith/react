@@ -38,12 +38,37 @@ function ExampleWithManyStates() {
     </div>
   )
 }
+const ChatAPI = {
+  subscribeToFriendStatus(){},
+  unsubscribeFromFriendStatus(){}
+}
+function FriendStatus(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() => {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
 
 function App() {
+
   return (
     <div className="App">
       <Example />
       <ExampleWithManyStates />
+      <FriendStatus friend={{id: 1}} />
     </div>
   );
 }
