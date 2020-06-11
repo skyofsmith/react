@@ -8,7 +8,7 @@ function Example() {
   })
   return (
     <div>
-      <p>You clicked <span style={{'font-size': '50px'}}>{count}</span> times</p>
+      <p>You clicked <span style={{'fontSize': '50px'}}>{count}</span> times</p>
       <button onClick={() => setCount(count + 1)}>
         Click me
       </button>
@@ -50,8 +50,10 @@ function FriendStatus(props) {
   }
 
   useEffect(() => {
+    console.log('useEffect');
     ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
     return () => {
+      console.log('unuseEffect');
       ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
     };
   });
@@ -63,12 +65,16 @@ function FriendStatus(props) {
 }
 
 function App() {
+  const [isChecked, setChecked] = useState(false);
 
   return (
     <div className="App">
       <Example />
       <ExampleWithManyStates />
-      <FriendStatus friend={{id: 1}} />
+      <hr/>
+      <input type='checkbox' value={isChecked} onChange={() => setChecked(!isChecked)} />
+      <br></br>
+      { isChecked ? <FriendStatus friend={{id: 1}} /> : null }
     </div>
   );
 }
