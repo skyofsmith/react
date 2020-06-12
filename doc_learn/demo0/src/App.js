@@ -64,6 +64,39 @@ function FriendStatus(props) {
   return isOnline ? 'Online' : 'Offline';
 }
 
+function useMindStatus() {
+  const [mind, setMind] = useState(1);
+
+  // useEffect(() => {
+  //   console.log(`mind is ${mind}`);
+  //   return () => {
+  //     console.log(`disconnect mind`);
+  //   }
+  // })
+  return [mind, setMind]
+}
+
+function TweenA() {
+  const [mind, setMind] = useMindStatus();
+
+  return (
+    <div>
+      mind is {mind},
+      <button onClick={setMind(mind+1)}>+</button>
+    </div>
+  )
+}
+function TweenB() {
+  const [mind, setMind] = useMindStatus();
+
+  return (
+    <div>
+      mind is {mind},
+      <button onClick={setMind(mind-1)}>-</button>
+    </div>
+  )
+}
+
 function App() {
   const [isChecked, setChecked] = useState(false);
 
@@ -75,6 +108,9 @@ function App() {
       <input type='checkbox' value={isChecked} onChange={() => setChecked(!isChecked)} />
       <br></br>
       { isChecked ? <FriendStatus friend={{id: 1}} /> : null }
+      <br />
+      <TweenA />
+      <TweenB />
     </div>
   );
 }
