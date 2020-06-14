@@ -67,12 +67,12 @@ function FriendStatus(props) {
 function useMindStatus() {
   const [mind, setMind] = useState(1);
 
-  // useEffect(() => {
-  //   console.log(`mind is ${mind}`);
-  //   return () => {
-  //     console.log(`disconnect mind`);
-  //   }
-  // })
+  useEffect(() => {
+    console.log(`mind is ${mind}`);
+    return () => {
+      console.log(`disconnect mind`);
+    }
+  })
   return [mind, setMind]
 }
 
@@ -82,7 +82,7 @@ function TweenA() {
   return (
     <div>
       mind is {mind},
-      <button onClick={setMind(mind+1)}>+</button>
+      <button onClick={() => setMind(mind + 1)}>+</button>
     </div>
   )
 }
@@ -92,7 +92,7 @@ function TweenB() {
   return (
     <div>
       mind is {mind},
-      <button onClick={setMind(mind-1)}>-</button>
+      <button onClick={() => setMind(mind-1)}>-</button>
     </div>
   )
 }
