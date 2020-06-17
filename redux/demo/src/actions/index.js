@@ -20,3 +20,18 @@ export const toggleTodo = id => {
     id
   }
 }
+
+export const add = value => {
+  console.log('reducer add', value)
+  return {
+    type: 'ADD',
+    value
+  }
+}
+export const dec = value => {
+  console.log('reducer dec', value)
+  return {
+    type: 'DEC',
+    value
+  }
+}
